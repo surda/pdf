@@ -4,8 +4,5 @@ namespace Surda\Pdf;
 
 interface IPdfBuilderFactory
 {
-    /**
-     * @return PdfBuilder
-     */
     public function create(): PdfBuilder;
 }

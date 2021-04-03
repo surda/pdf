@@ -4,16 +4,9 @@ namespace Surda\Pdf;
 
 class PdfBuilderFactory implements IPdfBuilderFactory
 {
-    /** @var MpdfFactory */
-    private $mpdfFactory;
+    private MpdfFactory $mpdfFactory;
+    private IPdfTemplateFactory $templateFactory;
 
-    /** @var IPdfTemplateFactory */
-    private $templateFactory;
-
-    /**
-     * @param MpdfFactory         $mpdfFactory
-     * @param IPdfTemplateFactory $templateFactory
-     */
     public function __construct(MpdfFactory $mpdfFactory, IPdfTemplateFactory $templateFactory)
     {
         $this->mpdfFactory = $mpdfFactory;
@@ -21,7 +14,6 @@ class PdfBuilderFactory implements IPdfBuilderFactory
     }
 
     /**
-     * @return PdfBuilder
      * @throws \Mpdf\MpdfException
      */
     public function create(): PdfBuilder

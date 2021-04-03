@@ -7,19 +7,14 @@ use Mpdf\MpdfException;
 
 class MpdfFactory
 {
-    /** @var array */
-    private $config;
+    private array $config;
 
-    /**
-     * @param array $config
-     */
     public function __construct(array $config = [])
     {
         $this->config = $config;
     }
 
     /**
-     * @return Mpdf
      * @throws MpdfException
      */
     public function create(): Mpdf
@@ -27,17 +22,11 @@ class MpdfFactory
         return new Mpdf($this->config);
     }
 
-    /**
-     * @return array
-     */
     public function getConfig(): array
     {
         return $this->config;
     }
 
-    /**
-     * @param array $config
-     */
     public function setConfig(array $config): void
     {
         $this->config = $config;

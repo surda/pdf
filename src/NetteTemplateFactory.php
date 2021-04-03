@@ -2,25 +2,18 @@
 
 namespace Surda\Pdf;
 
-use Nette\Application\UI\ITemplateFactory;
+use Nette\Application\UI\TemplateFactory;
 use Nette\Bridges\ApplicationLatte\Template;
 
 class NetteTemplateFactory extends AbstractTemplateFactory
 {
-    /** @var ITemplateFactory */
-    private $templateFactory;
+    private TemplateFactory $templateFactory;
 
-    /**
-     * @param ITemplateFactory $templateFactory
-     */
-    public function __construct(ITemplateFactory $templateFactory)
+    public function __construct(TemplateFactory $templateFactory)
     {
         $this->templateFactory = $templateFactory;
     }
 
-    /**
-     * @return Template
-     */
     public function create(): Template
     {
         /** @var Template $template */

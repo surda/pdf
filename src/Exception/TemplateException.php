@@ -2,7 +2,9 @@
 
 namespace Surda\Pdf\Exception;
 
-class TemplateException extends \LogicException
+use LogicException;
+
+class TemplateException extends LogicException
 {
 
 }

@@ -3,3 +3,7 @@ includes:
 	- vendor/phpstan/phpstan-nette/rules.neon
 	- vendor/phpstan/phpstan-strict-rules/rules.neon
 	- vendor/phpstan/phpstan-deprecation-rules/rules.neon
+parameters:
+	checkGenericClassInNonGenericObjectType: false
+	ignoreErrors:
+		- '#in iterable type array\.#'

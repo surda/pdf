@@ -5,57 +5,38 @@ namespace Surda\Pdf;
 use Nette\Bridges\ApplicationLatte\Template;
 use Nette\Utils\Strings;
 use Surda\Pdf\Exception\TemplateException;
+use Surda\Pdf\Utils\Templater;
 
 abstract class AbstractTemplateFactory implements IPdfTemplateFactory
 {
-    /** @var mixed[] */
-    protected $defaults = [
+    protected array $defaults = [
         'layout' => '@default',
     ];
 
-    /** @var mixed[] */
-    protected $config = [
+    protected array $config = [
         'layout' => '@default',
     ];
 
-    /**
-     * @param mixed[] $defaults
-     */
     public function setDefaults(array $defaults): void
     {
         $this->defaults = $defaults;
     }
 
-    /**
-     * @param mixed $key
-     * @param mixed $value
-     */
-    public function setDefaultsItem($key, $value): void
+    public function setDefaultsItem(mixed $key, mixed $value): void
     {
         $this->defaults[$key] = $value;
     }
 
-    /**
-     * @param mixed[] $config
-     */
     public function setConfig(array $config): void
     {
         $this->config = $config;
     }
 
-    /**
-     * @param mixed $key
-     * @param mixed $value
-     */
-    public function setConfigItem($key, $value): void
+    public function setConfigItem(mixed $key, mixed $value): void
     {
         $this->config[$key] = $value;
     }
 
-    /**
-     * @param Template $template
-     * @return Template
-     */
     protected function prepare(Template $template): Template
     {
         $template = $this->prepareDefaults($template);
@@ -64,10 +45,6 @@ abstract class AbstractTemplateFactory implements IPdfTemplateFactory
         return $template;
     }
 
-    /**
-     * @param Template $template
-     * @return Template
-     */
     protected function prepareDefaults(Template $template): Template
     {
         // Layout
@@ -76,15 +53,11 @@ abstract class AbstractTemplateFactory implements IPdfTemplateFactory
         }
 
         // Append defaults to template
-        $template->add('_defaults', (object) $this->defaults);
+        Templater::addParameter($template, '_defaults', (object) $this->defaults);
 
         return $template;
     }
 
-    /**
-     * @param Template $template
-     * @return Template
-     */
     protected function prepareConfig(Template $template): Template
     {
         // Layout
@@ -93,15 +66,12 @@ abstract class AbstractTemplateFactory implements IPdfTemplateFactory
         }
 
         // Append defaults to template
-        $template->add('_config', (object) $this->config);
+        Templater::addParameter($template, '_config', (object) $this->config);
+
 
         return $template;
     }
 
-    /**
-     * @param string $layout
-     * @return string
-     */
     protected function prepareLayout(string $layout): string
     {
         if (Strings::startsWith($layout, '@')) {

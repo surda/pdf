@@ -6,8 +6,5 @@ use Nette\Bridges\ApplicationLatte\Template;
 
 interface IPdfTemplateFactory
 {
-    /**
-     * @return Template
-     */
     public function create(): Template;
 }
